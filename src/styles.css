@@ -1,0 +1,323 @@
+:root{
+  --bg:#0b1020;
+  --card:#0f1724;
+  --muted:#9aa4b2;
+  --accent:#8ab4ff;
+  --glass: rgba(255,255,255,0.02);
+  --error:#ff9b9b;
+}
+[data-theme='light']{
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --accent: #2563eb;
+  --glass: rgba(0,0,0,0.03);
+  color: #0b1220;
+}
+/* Modern, readable dark mode */
+[data-theme="dark"] {
+  --bg: #121826;             /* Softer navy dark, not pitch black */
+  --panel: #1c2433;          /* Card panels slightly lighter */
+  --text: #f2f5fa;           /* Brighter text */
+  --muted: #c3ccd9;          /* Soft grey text, still readable */
+  --nav-bg: #161d2b;         /* Navbar slightly lifted */
+  --nav-text: #f1f5ff;       /* Almost white */
+  --border: rgba(255,255,255,0.12);
+
+  /* Accent colors */
+  --accent: #4f8cff;
+  --accent-hover: #6ca3ff;
+}
+[data-theme="dark"] .panel {
+  background: var(--panel);
+  color: var(--text);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
+
+[data-theme="dark"] h2,
+[data-theme="dark"] h3 {
+  color: var(--text);
+}
+
+[data-theme="dark"] .explain,
+[data-theme="dark"] p {
+  color: var(--muted);
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.3);
+}
+/* Remove bullets from About page lists */
+.panel ul {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.panel ul li {
+  margin-bottom: 6px;       /* optional spacing */
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;                 /* keeps emoji + text aligned */
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.45);
+}
+[data-theme="dark"] .apod-media img {
+  box-shadow: 0 12px 28px rgba(0,0,0,0.45);
+  border-radius: 12px;
+}
+/* Fix: readable active nav button in dark mode */
+[data-theme="dark"] .nav.nav-white .navlinks button.active {
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  color: var(--nav-text);                /* keep text bright/visible */
+  box-shadow: 0 6px 14px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+/* Slightly increase contrast for active label */
+[data-theme="dark"] .nav.nav-white .navlinks button.active {
+  font-weight: 700;
+}
+
+/* Make sure the tiny inner text (if present) also uses readable color */
+[data-theme="dark"] .nav.nav-white .navlinks button.active,
+[data-theme="dark"] .nav.nav-white .navlinks button.active svg {
+  color: var(--nav-text) !important;
+  fill: var(--nav-text) !important;
+}
+
+/* Optional: reduce the active pill brightness on hover so it doesn't flash white */
+[data-theme="dark"] .nav.nav-white .navlinks button.active:hover {
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+}
+
+/* === Larger Heart Buttons === */
+.heart-btn {
+  background: transparent !important;
+  color: var(--muted);
+  padding: 10px;               /* increased padding */
+  width: 48px;                 /* larger touch target */
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: none;
+  box-shadow: none !important;
+  cursor: pointer;
+  transition: transform .12s, filter .12s, color .12s;
+}
+
+/* Filled red state */
+.heart-btn.filled {
+  color: #ff4d6d;
+  filter: drop-shadow(0 6px 14px rgba(255,77,109,0.15));
+}
+
+/* Hover + focus feedback */
+.heart-btn:hover { 
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+.heart-btn:focus { 
+  outline: 3px solid rgba(138,180,255,0.20); 
+  outline-offset: 4px;
+}
+/* Force icon buttons to be clean + transparent */
+.icon-btn {
+  background: transparent !important;
+  border: none !important;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  margin: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--nav-text);
+  box-shadow: none !important;
+  outline: none;
+  transition: transform .12s ease, background .12s ease;
+}
+
+/* Hover effect only (no color fill) */
+.icon-btn:hover {
+  background: rgba(0,0,0,0.06);
+  transform: translateY(-2px);
+}
+
+/* active click */
+.icon-btn:active {
+  transform: scale(0.90);
+}
+
+/* disabled */
+.icon-btn:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+/* Ensure no inherited .controls button blue styling applies */
+.controls .icon-btn {
+  background: transparent !important;
+  color: var(--nav-text);
+}
+
+
+/* Card version (slightly smaller but still bigger) */
+.card-actions .heart-btn {
+  width: 42px;
+  height: 42px;
+  padding: 8px;
+}
+
+/* Ensure SVG scales correctly */
+.heart-btn svg {
+  width: 24px;
+  height: 24px;
+  color: inherit;
+}
+
+/* Fix height of asteroid panel & enable internal scroll */
+.asteroid-panel {
+  max-height: 500px;     /* Adjust height as you like */
+  overflow-y: auto;      /* Scroll inside panel */
+  padding-right: 10px;   /* Avoid scrollbar overlapping text */
+}
+
+/* Optional: style the internal scrollbar */
+.asteroid-panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.asteroid-panel::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+}
+
+.asteroid-panel::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,Arial;background:var(--bg);color:inherit;-webkit-font-smoothing:antialiased}
+.app{min-height:100vh;display:flex;flex-direction:column}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:var(--glass);backdrop-filter:blur(6px);position:sticky;top:0;z-index:10}
+.brand{font-weight:700}
+.navlinks{display:flex;align-items:center;gap:8px}
+.navlinks button{background:none;border:none;color:var(--muted);padding:8px 10px;margin-left:6px;cursor:pointer;border-radius:8px;transition:all .18s}
+.navlinks button:hover{transform:translateY(-2px)}
+.navlinks button.active{color:var(--accent);font-weight:600;background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));backdrop-filter:blur(2px)}
+.theme-toggle{font-size:18px}
+.container{flex:1;padding:24px;max-width:1200px;margin:0 auto}
+.panel{background:var(--card);padding:18px;border-radius:14px;box-shadow: 0 6px 18px rgba(2,6,23,0.6)}
+h2{margin:0 0 12px 0}
+.row{display:flex;gap:8px;align-items:center;margin-bottom:12px}
+.controls input[type="date"], .controls input[type="number"], .controls select{padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+.controls button{padding:8px 12px;border-radius:8px;border:none;background:var(--accent);color:#fff;cursor:pointer;transition:transform .15s}
+.controls button:active{transform:translateY(1px)}
+.spacer{flex:1}
+.muted{color:var(--muted)}
+.apod{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.apod-media{border-radius:10px;overflow:hidden;cursor:pointer;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+.apod-media img, .apod-media iframe{width:100%;height:420px;object-fit:cover;display:block}
+.apod-meta{padding:6px}
+.explain{line-height:1.5;max-height:220px;overflow:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));padding:8px;border-radius:10px;transition:transform .12s, box-shadow .12s}
+.card:focus-within, .card:hover{transform:translateY(-6px);box-shadow:0 10px 24px rgba(2,6,23,0.5)}
+.card .media{height:140px;overflow:hidden;border-radius:8px}
+.card img{width:100%;height:100%;object-fit:cover;display:block}
+.card-body{padding:8px}
+.card h4{margin:0 0 6px 0;font-size:14px}
+.meta{font-size:12px;color:var(--muted);margin-bottom:8px}
+.card-actions button{padding:6px 10px;border-radius:8px;border:none;background:transparent;color:var(--accent);cursor:pointer}
+.neo-table{width:100%;border-collapse:collapse;margin-top:12px}
+.neo-table th, .neo-table td{padding:10px;text-align:left;border-bottom:1px solid rgba(0,0,0,0.06)}
+.neo-cards{display:flex;gap:12px;margin:8px 0}
+.neo-card{background:var(--card);padding:12px;border-radius:8px}
+.neo-card.small{min-width:160px;text-align:center}
+.footer{text-align:center;padding:12px;color:var(--muted)}
+.input-error { color: var(--error); margin-top:6px; font-size:13px; background: rgba(255,155,155,0.04); padding:8px; border-radius:8px }
+
+/* Skeleton / shimmer */
+.skeleton { background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); }
+.shimmer {
+  height:100%;
+  background:linear-gradient(90deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.03) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s linear infinite;
+}
+@keyframes shimmer { from { background-position: -200% 0 } to { background-position: 200% 0 } }
+.sh-30{height:14px;width:70%;border-radius:8px;margin:8px 0}
+.sh-16{height:12px;width:40%;border-radius:8px}
+
+/* Modal & animation + focus styles */
+.modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:flex;align-items:center;justify-content:center;z-index:200;opacity:0;animation:fadeIn .14s forwards}
+.modal{background:var(--card);border-radius:12px;padding:12px;max-width:900px;width:92%;box-shadow:0 20px 40px rgba(2,6,23,0.6);transform:translateY(8px);opacity:0;animation:popIn .18s forwards;position:relative}
+.modal-close{position:absolute;right:18px;top:14px;border:none;background:transparent;color:var(--muted);font-size:18px}
+.modal-content img{max-width:100%}
+@keyframes fadeIn{to{opacity:1}}
+@keyframes popIn{to{transform:none;opacity:1}}
+
+/* skeleton card shimmer shapes */
+.media.shimmer { border-radius:8px; background: #0e1624; }
+.card .sh-30.shimmer, .card .sh-16.shimmer { background: #0e1624; }
+
+/* polished buttons & focus */
+button { transition: transform .12s, box-shadow .12s }
+button:hover{ transform: translateY(-3px); box-shadow: 0 8px 18px rgba(10,20,40,0.18) }
+button:active{ transform: translateY(-1px) }
+:focus{ outline: 3px solid rgba(138,180,255,0.16); outline-offset:3px; border-radius:8px }
+
+/* responsive */
+@media (max-width:900px){.apod{grid-template-columns:1fr}.apod-media img{height:260px}.card .media{height:120px}}
+
+body{margin:0;font-family:Inter, "Segoe UI", Roboto, system-ui, Arial;background:var(--bg);color:inherit;-webkit-font-smoothing:antialiased}
+.brand{font-weight:800; font-size:20px; letter-spacing:0.2px; color:var(--nav-text)}
+.nav.nav-white{
+  background: var(--nav-bg);
+  color: var(--nav-text);
+  box-shadow: 0 1px 0 rgba(10,20,40,0.04);
+}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:16px 28px; backdrop-filter: blur(6px); position:sticky; top:0; z-index:10}
+.navlinks{display:flex;align-items:center;gap:12px}
+.navlinks button{background:none;border:none;color:var(--muted);padding:8px 12px;margin-left:6px;cursor:pointer;border-radius:10px;transition:all .18s;font-size:15px;font-weight:600}
+.navlinks button:hover{transform:translateY(-2px)}
+.navlinks button.active{color:var(--nav-text); background: #f3f6fb; box-shadow: 0 6px 14px rgba(10,20,40,0.04)}
+.theme-toggle{font-size:18px}
+
+/* increase main heading size slightly */
+h2 { font-size: 26px; font-weight: 800; margin-bottom:12px }
+
+/* --- heart styles --- */
+.heart-btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:none;
+  background:transparent;
+  padding:6px;
+  cursor:pointer;
+  border-radius:8px;
+  transition: transform .12s, filter .12s, color .12s;
+  color:var(--muted);
+}
+.heart-btn:hover{ transform: translateY(-2px); filter: brightness(1.05) }
+.heart-btn.empty { color: var(--muted) }
+.heart-btn.filled { color: #ff4d6d; filter: drop-shadow(0 6px 14px rgba(255,77,109,0.16)); }
+
+/* adjust control area spacing */
+.controls input[type="date"] { padding:8px 10px; border-radius:8px; border:1px solid rgba(0,0,0,0.06); background: #fff; color: #0b1220; }
+.controls input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer }
+
+/* small a11y helper to hide label text visually but keep for screen readers */
+.sr-only { position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+/* input error & small tweaks */
+.input-error { color: var(--error); margin-top:6px; font-size:13px; background: rgba(255,155,155,0.04); padding:8px; border-radius:8px }
